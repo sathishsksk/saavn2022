@@ -2,9 +2,9 @@ from logging import error
 import os
 from re import A
 import requests
-from helpers.send_media import send
-from helpers.Sender import *
-from addons.utils import logger
+from bot.helpers.send_media import send
+from bot.helpers.Sender import *
+from bot.addons.utils import logger
 import traceback
 api = 'https://semantic-genni-sathishskinsta.koyeb.app/'
 
