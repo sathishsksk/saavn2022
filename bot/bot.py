@@ -5,6 +5,7 @@ from psutil import disk_usage, cpu_percent, swap_memory, cpu_count, virtual_memo
 from time import time
 from sys import executable
 
+from wserver import start_server_async
 from .addons.utils import logger
 from .helpers.media_info import *
 import os
@@ -14,7 +15,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, Callb
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 dest = "bot/telegramMusic/"
 
-from bot import bot, dispatcher, updater, botStartTime, Interval, app, main_loop
+from bot import bot, dispatcher, updater, IS_VPS, PORT, botStartTime, Interval, app, main_loop
 from .helper.telegram_helper.message_utils import sendMessage, sendMarkup, editMessage, sendLogFile
 
 TOKEN = '5595298904:AAExEMcbyKGA3cBdIECmFB-AD55Zx8L0uOM'
@@ -144,6 +145,15 @@ def main():
     updater = Updater(TOKEN, use_context=True)
 
     dp = updater.dispatcher
+    
+    if IS_VPS:
+        asyncio.get_event_loop().run_until_complete(start_server_async(PORT))
+    # Check if the bot is restarting
+    if os.path.isfile(".restartmsg"):
+        with open(".restartmsg") as f:
+            chat_id, msg_id = map(int, f)
+        bot.edit_message_text("Restarted successfully!", chat_id, msg_id)
+        os.remove(".restartmsg")
 
     PORT = int(os.environ.get('PORT', '8443'))
 
