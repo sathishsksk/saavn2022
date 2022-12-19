@@ -30,7 +30,6 @@ def stats(update, context):
     if ospath.exists('.git'):
         last_commit = check_output(["git log -1 --date=short --pretty=format:'%cd <b>From</b> %cr'"], shell=True).decode()
     else:
-    currentTime = get_readable_time(time() - botStartTime)
     osUptime = get_readable_time(time() - boot_time())
     total, used, free, disk= disk_usage('/')
     total = get_readable_file_size(total)
@@ -51,7 +50,6 @@ def stats(update, context):
     mem_u = get_readable_file_size(memory.used)
     stats = f'<b>╭──「⭕️ BOT STATISTICS ⭕️」</b>\n' \
             f'<b>│</b>\n' \
-            f'<b>├  ⏰ Bot Uptime : {currentTime}</b>\n' \
             f'<b>├  💾 Total Disk Space : {total}</b>\n' \
             f'<b>├  📀 Total Used Space : {used}</b>\n' \
             f'<b>├  💿 Total Free Space : {free}</b>\n' \
