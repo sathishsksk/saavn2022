@@ -11,19 +11,19 @@ from time import time
 from sys import executable
 
 from wserver import start_server_async
-from .addons.utils import logger
-from .helpers.media_info import *
+from bot.addons.utils import logger
+from bot.helpers.media_info import *
 import os
-from .messages.creator import *
+from bot.messages.creator import *
 from telegram.ext.dispatcher import run_async
-from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
+from bot.helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 dest = "bot/telegramMusic/"
 
 from bot import bot, dispatcher, updater, IS_VPS, PORT, botStartTime, Interval, app, main_loop
 from bot.helper.ext_utils import fs_utils
-from .helper.telegram_helper.message_utils import *
+from bot.helper.telegram_helper.message_utils import *
 
 TOKEN = '5595298904:AAExEMcbyKGA3cBdIECmFB-AD55Zx8L0uOM'
 
