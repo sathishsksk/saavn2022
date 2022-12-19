@@ -22,68 +22,56 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 dest = "bot/telegramMusic/"
 
 from bot import bot, dispatcher, updater, IS_VPS, PORT, botStartTime, Interval, app, main_loop
+from bot.helper.ext_utils import fs_utils
 from .helper.telegram_helper.message_utils import *
 
 TOKEN = '5595298904:AAExEMcbyKGA3cBdIECmFB-AD55Zx8L0uOM'
 
+
 def stats(update, context):
-    if ospath.exists('.git'):
-        last_commit = check_output(["git log -1 --date=short --pretty=format:'%cd <b>From</b> %cr'"], shell=True).decode()
-    else:
-    osUptime = get_readable_time(time() - boot_time())
-    total, used, free, disk= disk_usage('/')
+    currentTime = get_readable_time(time.time() - botStartTime)
+    total, used, free = shutil.disk_usage('.')
     total = get_readable_file_size(total)
     used = get_readable_file_size(used)
     free = get_readable_file_size(free)
-    sent = get_readable_file_size(net_io_counters().bytes_sent)
-    recv = get_readable_file_size(net_io_counters().bytes_recv)
-    cpuUsage = cpu_percent(interval=0.5)
-    p_core = cpu_count(logical=False)
-    t_core = cpu_count(logical=True)
-    swap = swap_memory()
-    swap_p = swap.percent
-    swap_t = get_readable_file_size(swap.total)
-    memory = virtual_memory()
-    mem_p = memory.percent
-    mem_t = get_readable_file_size(memory.total)
-    mem_a = get_readable_file_size(memory.available)
-    mem_u = get_readable_file_size(memory.used)
-    stats = f'<b>╭──「⭕️ BOT STATISTICS ⭕️」</b>\n' \
-            f'<b>│</b>\n' \
-            f'<b>├  💾 Total Disk Space : {total}</b>\n' \
-            f'<b>├  📀 Total Used Space : {used}</b>\n' \
-            f'<b>├  💿 Total Free Space : {free}</b>\n' \
-            f'<b>├  🔼 Total Upload : {sent}</b>\n' \
-            f'<b>├  🔽 Total Download : {recv}</b>\n' \
-            f'<b>├  🖥️ CPU : {cpuUsage}%</b>\n' \
-            f'<b>├  🎮 RAM : {mem_p}%</b>\n' \
-            f'<b>├  💽 DISK : {disk}%</b>\n' \
-            f'<b>│</b>\n' \
-            f'<b>╰──「 🚸 @sk_mass_king 🚸 」</b>'
-    sendMessage(stats, context.bot, update.message)
+    sent = get_readable_file_size(psutil.net_io_counters().bytes_sent)
+    recv = get_readable_file_size(psutil.net_io_counters().bytes_recv)
+    cpuUsage = psutil.cpu_percent(interval=0.5)
+    memory = psutil.virtual_memory().percent
+    disk = psutil.disk_usage('/').percent
+    stats = f'<b>Bot Uptime:</b> <code>{currentTime}</code>\n' \
+            f'<b>Total Disk Space:</b> <code>{total}</code>\n' \
+            f'<b>Used:</b> <code>{used}</code> ' \
+            f'<b>Free:</b> <code>{free}</code>\n\n' \
+            f'<b>Upload:</b> <code>{sent}</code>\n' \
+            f'<b>Download:</b> <code>{recv}</code>\n\n' \
+            f'<b>CPU:</b> <code>{cpuUsage}%</code> ' \
+            f'<b>RAM:</b> <code>{memory}%</code> ' \
+            f'<b>DISK:</b> <code>{disk}%</code>'
+    sendMessage(stats, context.bot, update)
     
 def restart(update, context):
-    restart_message = sendMessage("Restarting...", context.bot, update.message)
-    if Interval:
-        Interval[0].cancel()
-    clean_all()
-    srun(["pkill", "-f", "gunicorn|aria2c|qbittorrent-nox"])
-    srun(["python3", "update.py"])
+    restart_message = sendMessage("Restarting, Please wait!", context.bot, update)
+    # Save restart message object in order to reply to it after restarting
     with open(".restartmsg", "w") as f:
         f.truncate(0)
         f.write(f"{restart_message.chat.id}\n{restart_message.message_id}\n")
-    osexecl(executable, executable, "-m", "bot")
+    fs_utils.clean_all()
+    alive.terminate()
+    web.terminate()
+    os.execl(executable, executable, "-m", "bot")
+
     
-    
+
 def ping(update, context):
-    start_time = int(round(time() * 1000))
-    reply = sendMessage("Starting Ping", context.bot, update.message)
-    end_time = int(round(time() * 1000))
+    start_time = int(round(time.time() * 1000))
+    reply = sendMessage("Starting Ping", context.bot, update)
+    end_time = int(round(time.time() * 1000))
     editMessage(f'{end_time - start_time} ms', reply)
 
 
 def log(update, context):
-    sendLogFile(context.bot, update.message)
+    sendLogFile(context.bot, update)
     
     
 def start(update, context):
