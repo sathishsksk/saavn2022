@@ -1,6 +1,6 @@
 import youtube_dl
-from addons.utils import logger
-from helpers.Sender import error_msg
+from .addons.utils import logger
+from .helpers.Sender import error_msg
 
 # Download the song and convert it to mp3
 
