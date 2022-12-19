@@ -1,8 +1,8 @@
 from logging import log
-from .mutagen.id3 import ID3, APIC, _util, USLT
-from .mutagen.mp3 import EasyMP3
-from .mutagen.easyid3 import EasyID3
-from .addons.utils import logger
+from mutagen.id3 import ID3, APIC, _util, USLT
+from mutagen.mp3 import EasyMP3
+from mutagen.easyid3 import EasyID3
+from addons.utils import logger
 EasyID3.RegisterTextKey("year", "TDRC")
 
 
