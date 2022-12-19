@@ -1,6 +1,6 @@
 import requests
 from telegram.utils.helpers import escape_markdown as es
-from helpers.caption import caption_maker
+from bot.helpers.caption import caption_maker
 
 
 def send_media(media_binary, album, title, artist, duration, thumb_binary, msg, update, language):
