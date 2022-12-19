@@ -1,3 +1,8 @@
+import shutil, psutil
+import signal
+import os
+import asyncio
+
 from signal import signal, SIGINT
 from os import path as ospath, remove as osremove, execl as osexecl
 from subprocess import run as srun, check_output
@@ -17,7 +22,7 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 dest = "bot/telegramMusic/"
 
 from bot import bot, dispatcher, updater, IS_VPS, PORT, botStartTime, Interval, app, main_loop
-from .helper.telegram_helper.message_utils import sendMessage, sendMarkup, editMessage, sendLogFile
+from .helper.telegram_helper.message_utils import *
 
 TOKEN = '5595298904:AAExEMcbyKGA3cBdIECmFB-AD55Zx8L0uOM'
 
