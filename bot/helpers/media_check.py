@@ -1,4 +1,4 @@
-from .addons.utils import logger
+from addons.utils import logger
 
 # check if the songs are present in the server
 
