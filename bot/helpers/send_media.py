@@ -1,11 +1,11 @@
 import requests
 import traceback
-from addons.utils import logger
-from helpers.media_check import song_present
-from helpers.Downloader import download_song
-from helpers.Meta_Adder import add_meta
-from helpers.Sender import send_media, send_status, error_msg
-dest = "telegramMusic/"
+from .addons.utils import logger
+from .helpers.media_check import song_present
+from .helpers.Downloader import download_song
+from .helpers.Meta_Adder import add_meta
+from .helpers.Sender import send_media, send_status, error_msg
+dest = "bot/telegramMusic/"
 
 
 def send(song_data, update):
