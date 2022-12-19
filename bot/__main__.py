@@ -11,6 +11,7 @@ from .helpers.media_info import *
 import os
 from .messages.creator import *
 from telegram.ext.dispatcher import run_async
+from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 dest = "bot/telegramMusic/"
