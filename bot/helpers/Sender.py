@@ -46,3 +46,7 @@ def error_msg(update, error):
     msg = f"""*Hey there was an error while processing the media*\n\n{es(error,version=2)}"""
     update.message.reply_text(msg, parse_mode="MarkdownV2")
 
+def process_exist(update):
+    update.message.reply_text("Please wait untill previous task is completed 🥺🥺")
+
+    
