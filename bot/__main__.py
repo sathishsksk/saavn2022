@@ -1,3 +1,5 @@
+from aiohttp import web
+from plugins import web_server
 import sys
 import shutil, psutil
 import signal
@@ -104,6 +106,12 @@ def main():
     dp.add_error_handler(error_handler)
 
     logger.info("Bot Started!💥")
+
+    #web-response
+        app = web.AppRunner(await web_server())
+        await app.setup()
+        bind_address = "0.0.0.0"
+        await web.TCPSite(app, bind_address, PORT).start()
     
     # updater.start_polling()
     updater.start_polling()
