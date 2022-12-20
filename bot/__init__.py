@@ -29,3 +29,6 @@ SERVER_PORT = os.environ.get('SERVER_PORT', None)
 PORT = os.environ.get('PORT', SERVER_PORT)
 web = subprocess.Popen([f"gunicorn wserver:start_server --bind 0.0.0.0:{PORT} --worker-class aiohttp.GunicornWebWorker"], shell=True)
 time.sleep(1)
+
+bot = updater.bot
+dispatcher = updater.dispatcher
