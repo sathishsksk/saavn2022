@@ -17,7 +17,7 @@ dest = "telegramMusic/"
 import qbittorrentapi as qba
 import telegram.ext as tg
 
-TOKEN = '5595298904:AAExEMcbyKGA3cBdIECmFB-AD55Zx8L0uOM'
+TOKEN = '5862929153:AAGLEMTNGuOslFHfwzl1ncsCvhHTvRhcYCs'
 SERVER_PORT = os.environ.get('SERVER_PORT', None)
 PORT = os.environ.get('PORT', SERVER_PORT)
 IS_VPS = os.environ.get('IS_VPS', None)
