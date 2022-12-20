@@ -4,7 +4,6 @@ import threading
 import time
 import math
 
-from telegram import get_readable_message, get_readable_file_size, get_readable_time, MirrorStatus, setInterval
 from telegram import InlineKeyboardMarkup
 from telegram.ext import CallbackQueryHandler
 from bot.helper.telegram_helper import message_utils
