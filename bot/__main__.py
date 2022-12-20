@@ -1,10 +1,6 @@
-from PySide2.QtWidgets import *
-from PySide2.QtGui import *
-from PySide2.QtCore import *
 import sys
 import shutil, psutil
 import signal
-import os
 import asyncio
 from signal import signal, SIGINT
 from requests import get as rget
@@ -108,8 +104,6 @@ def main():
     dp.add_error_handler(error_handler)
 
     logger.info("Bot Started!💥")
-    
-    signal.signal(signal.SIGINT)
     
     # updater.start_polling()
     updater.start_polling()
