@@ -103,7 +103,7 @@ def main():
 
     dp.add_error_handler(error_handler)
 
-    LOGGER.info("Bot Started!")
+    logger.info("Bot Started!💥")
     
     signal.signal(signal.SIGINT)
     
