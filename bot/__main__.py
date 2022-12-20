@@ -16,7 +16,6 @@ from bot.helpers.media_info import *
 import os
 from bot.messages.creator import *
 from telegram.ext.dispatcher import run_async
-from bot.helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 dest = "bot/telegramMusic/"
@@ -28,27 +27,6 @@ from bot.helper.telegram_helper.message_utils import *
 TOKEN = '5595298904:AAExEMcbyKGA3cBdIECmFB-AD55Zx8L0uOM'
 
 
-def stats(update, context):
-    currentTime = get_readable_time(time.time() - botStartTime)
-    total, used, free = shutil.disk_usage('.')
-    total = get_readable_file_size(total)
-    used = get_readable_file_size(used)
-    free = get_readable_file_size(free)
-    sent = get_readable_file_size(psutil.net_io_counters().bytes_sent)
-    recv = get_readable_file_size(psutil.net_io_counters().bytes_recv)
-    cpuUsage = psutil.cpu_percent(interval=0.5)
-    memory = psutil.virtual_memory().percent
-    disk = psutil.disk_usage('/').percent
-    stats = f'<b>Bot Uptime:</b> <code>{currentTime}</code>\n' \
-            f'<b>Total Disk Space:</b> <code>{total}</code>\n' \
-            f'<b>Used:</b> <code>{used}</code> ' \
-            f'<b>Free:</b> <code>{free}</code>\n\n' \
-            f'<b>Upload:</b> <code>{sent}</code>\n' \
-            f'<b>Download:</b> <code>{recv}</code>\n\n' \
-            f'<b>CPU:</b> <code>{cpuUsage}%</code> ' \
-            f'<b>RAM:</b> <code>{memory}%</code> ' \
-            f'<b>DISK:</b> <code>{disk}%</code>'
-    sendMessage(stats, context.bot, update)
     
 def restart(update, context):
     restart_message = sendMessage("Restarting, Please wait!", context.bot, update)
