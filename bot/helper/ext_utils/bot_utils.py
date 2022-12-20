@@ -6,6 +6,7 @@ import math
 
 from telegram import InlineKeyboardMarkup
 from telegram.ext import CallbackQueryHandler
+from telegram.ext.dispatcher import run_async
 
 LOGGER = logging.getLogger(__name__)
 
