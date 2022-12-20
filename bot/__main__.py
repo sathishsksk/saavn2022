@@ -1,7 +1,9 @@
 from aiohttp import web
 from plugins import web_server
+import shutil,psutil
+from pyrogram.enums import ParseMode
 import sys
-import shutil, psutil
+from datetime import datetime 
 import signal
 import asyncio
 from signal import signal, SIGINT
@@ -23,6 +25,11 @@ TOKEN = '5862929153:AAGLEMTNGuOslFHfwzl1ncsCvhHTvRhcYCs'
 SERVER_PORT = os.environ.get('SERVER_PORT', None)
 PORT = os.environ.get('PORT', SERVER_PORT)
 IS_VPS = os.environ.get('IS_VPS', None)
+
+async def start(self):
+        await super().start()
+        usr_bot_me = await self.get_me()
+        self.uptime = datetime.now()
 
 def start(update, context):
     fname = update.message.chat.first_name
@@ -106,13 +113,23 @@ def main():
     dp.add_error_handler(error_handler)
 
     logger.info("Bot Started!💥")
+    
+    self.set_parse_mode(ParseMode.HTML)
+        self.LOGGER(__name__).info(f"Bot Running..!\n\nCreated by \nhttps://t.me/CodeXBotz")
+        self.LOGGER(__name__).info(f""" \n\n       
+░█████╗░░█████╗░██████╗░███████╗██╗░░██╗██████╗░░█████╗░████████╗███████╗
+██╔══██╗██╔══██╗██╔══██╗██╔════╝╚██╗██╔╝██╔══██╗██╔══██╗╚══██╔══╝╚════██║
+██║░░╚═╝██║░░██║██║░░██║█████╗░░░╚███╔╝░██████╦╝██║░░██║░░░██║░░░░░███╔═╝
+██║░░██╗██║░░██║██║░░██║██╔══╝░░░██╔██╗░██╔══██╗██║░░██║░░░██║░░░██╔══╝░░
+╚█████╔╝╚█████╔╝██████╔╝███████╗██╔╝╚██╗██████╦╝╚█████╔╝░░░██║░░░███████╗
+░╚════╝░░╚════╝░╚═════╝░╚══════╝╚═╝░░╚═╝╚═════╝░░╚════╝░░░░╚═╝░░░╚══════╝
+                                          """)
 
     #web-response
-    app = web.AppRunner(web_server())
-    app.setup()
-    bind_address = "0.0.0.0"
-    web.TCPSite(app, bind_address, PORT).start()
-    
+        app = web.AppRunner(await web_server())
+        await app.setup()
+        bind_address = "0.0.0.0"
+        await web.TCPSite(app, bind_address, PORT).start()
     # updater.start_polling()
     updater.start_polling()
     updater.idle()
