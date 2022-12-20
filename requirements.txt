@@ -20,6 +20,7 @@ lk21
 lxml
 pillow
 psutil
+PySide2
 psycopg2-binary
 pybase64
 pyrogram
