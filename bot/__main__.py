@@ -20,7 +20,6 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, Callb
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 dest = "bot/telegramMusic/"
 
-from bot import bot, dispatcher, updater, IS_VPS, PORT, botStartTime, Interval, app, main_loop
 from bot.helper.ext_utils import fs_utils
 from bot.helper.telegram_helper.message_utils import *
 
