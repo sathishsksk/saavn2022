@@ -137,8 +137,6 @@ def main():
     
     dp.add_handler(CommandHandler("Restart", restart))
     
-    dp.add_handler(CommandHandler("stats", stats))
-    
     dp.add_handler(CommandHandler("ping", ping))
     
     dp.add_handler(CommandHandler("log", log))
