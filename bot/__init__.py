@@ -7,7 +7,7 @@ import string
 import subprocess
 import requests
 
-
+from telegram.ext import Updater
 import socket
 import faulthandler
 faulthandler.enable()
