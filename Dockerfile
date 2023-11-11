@@ -1,4 +1,4 @@
-FROM python:3.8-slim-buster 
+FROM sathishsk/music
 
 RUN apt-get -y update 
 RUN apt-get install -y ffmpeg 
